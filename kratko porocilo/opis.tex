@@ -1,0 +1,74 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[slovene]{babel}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb}
+\usepackage[a4paper,left=18mm,right=18mm,top=15mm,bottom=17mm]{geometry}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{microtype}
+\usepackage[hidelinks]{hyperref}
+\hypersetup{pdftitle={Liha barvanja ravninskih grafov brez sosednjih kratkih ciklov}}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{4pt}
+\setlist{nosep,leftmargin=*,topsep=3pt}
+\titleformat{\section}{\normalsize\bfseries}{}{0pt}{}
+\titlespacing*{\section}{0pt}{8pt}{4pt}
+\setlength{\emergencystretch}{2em}
+\pagestyle{plain}
+\begin{document}
+
+
+{\Large\bfseries Liha barvanja ravninskih grafov brez sosednjih kratkih ciklov\par}
+\vspace{5pt}
+
+\textbf{Finančni praktikum 2026/27 · Kratek opis in načrt projekta}\\
+Tema 3.2 Vertex coloring, Project 2: Odd colorings of planar graphs with no adjacent small cycles
+
+\section*{Opis problema in cilji}
+
+V projektu bomo raziskovali, kako omejitve glede kratkih ciklov vplivajo na število barv, potrebnih za liho barvanje ravninskega grafa. Obravnavali bomo enostavne povezane grafe. Pravilno barvanje vozlišč sosednjima vozliščema priredi različni barvi. Pri \textbf{lihem barvanju} dodatno zahtevamo, da ima vsako neizolirano vozlišče v svoji odprti soseščini vsaj eno barvo, ki se pojavi liho mnogokrat. Vozlišča samega pri tem ne štejemo. Najmanjše potrebno število barv označimo z \textbf{$\chi_o(G)$} in ga imenujemo liho kromatično število.
+
+Naš cilj bo izračunati $\chi_o(G)$ za majhne grafe iz izbranih razredov, poiskati in opisati grafe, ki potrebujejo pet barv, ter oblikovati domneve o mejah s tremi, štirimi oziroma petimi barvami. Pomemben izhodiščni primer je cikel $C_5$, za katerega velja $\chi_o(C_5)$ = 5. Preverjali bomo, ali so drugi primeri s petimi barvami povezani s prisotnostjo 5-ciklov oziroma z njihovim združevanjem in ali lahko najdene vzorce razširimo v neskončne družine.
+
+\section*{Obravnavani razredi grafov}
+
+V skladu z navodili bomo primerjali naslednje razrede povezanih ravninskih grafov:
+
+\begin{enumerate}
+\item grafe brez dveh sosednjih 3-ciklov;
+\item grafe brez dveh sosednjih ciklov dolžine največ 4 in ločeno največ 5;
+\item grafe brez dveh sekajočih se ciklov dolžine največ 4;
+\item grafe, v katerih noben 4-cikel ni soseden dvema ali več drugim 4-ciklom;
+\item grafe brez dveh sekajočih se ciklov dolžine največ 5.
+\end{enumerate}
+
+Cikla sta \textbf{sosednja}, če imata skupno povezavo, in \textbf{sekajoča se}, če imata skupno vozlišče. Pri filtriranju bomo iskali vse enostavne cikle ustreznih dolžin, tudi tiste s tetivami; zgolj pregled lic ravninske vložitve ali baze ciklov ne zadostuje. Razredi se lahko prekrivajo, zato bomo pripadnost preverjali za vsakega posebej.
+
+\section*{Metode in orodja}
+
+Osnovno okolje bo \textbf{SageMath s Pythonom}, ki omogoča delo z grafi, preverjanje ravninskosti, risanje in uporabo generatorjev. Za natančen izračun bomo implementirali \textbf{iskanje z vračanjem (backtracking)}: za dano število barv $k$ bomo iskali pravilno barvanje, ki izpolnjuje tudi pogoj lihosti. Število $k$ bomo povečevali od spodnje meje do prve rešitve. Iskanje bomo pospešili z izbiro bolj omejenih vozlišč, sprotnim štetjem barv v soseščinah in odpravljanjem simetrij med imeni barv. Delno barvanje bomo zavrnili le, kadar ga zagotovo ni več mogoče veljavno dopolniti.
+
+Pravilnost bomo preverili na ciklih: $\chi_o(C_n)$ = 3, kadar 3 deli n; $\chi_o(C_5)$ = 5; za preostale cikle velja $\chi_o(C_n)$ = 4. Vsako dobljeno barvanje bo preverila ločena funkcija. Za majhen kontrolni nabor bomo rezultate primerjali še z neodvisnim modelom \textbf{celoštevilskega linearnega programiranja (ILP)} v SageMathu, kjer bomo parnost izrazili s pomožnimi celoštevilskimi spremenljivkami.
+
+\newpage
+
+\section*{Načrt eksperimentov}
+
+\textbf{Sistematični pregled majhnih grafov.} Z generatorjem \textbf{geng} iz paketa nauty bomo generirali povezane neizomorfne grafe po številu vozlišč, z \textbf{planarg} izločili neravninske in nato uporabili filtre za navedene razrede. Cilj je popoln pregled vsaj do 10 vozlišč, nato pa po časovnih zmožnostih še dlje. Začetne meritve bodo pokazale izvedljiv obseg. Generiranje bomo pospešili z varnimi, utemeljenimi mejami za število povezav. Kot možnost za večje rede bomo preizkusili \textbf{plantri}; večkratne vložitve istega grafa bomo odstranili s kanoničnim zapisom.
+
+Za vsak razred in vsako število vozlišč bomo zabeležili število pregledanih grafov, največjo vrednost $\chi_o(G)$, čas računanja ter vse neizomorfne grafe, ki potrebujejo natanko pet barv. Morebitne primere z več kot petimi barvami bomo prav tako shranili in preverili. Pri petbarvnih primerih bomo analizirali 5-cikle, presečna vozlišča in bloke ter primerjali $C_5$ z grafom iz dveh 5-ciklov s skupnim vozliščem. Preverili bomo, v katerih razredih je $C_5$ edini tak primer v pregledanem obsegu.
+
+\textbf{Večji grafi in preverjanje domnev.} Iz ugotovitev bomo oblikovali natančne domneve o mejah $\chi_o(G)$. Večje primere bomo pridobivali iz ravninskih grafov z brisanjem povezav do izpolnitve pogojev ter z naključnimi spremembami, ki ohranijo ravninskost, povezanost in pripadnost razredu. Tak vzorec ne bo nujno enakomerno naključen. Za iskanje lihih 4-barvanj bomo uporabili backtracking in po potrebi \textbf{simulirano ohlajanje}. Pri slednjem bomo spreminjali barvo enega vozlišča ter zmanjševali vsoto števila enobarvnih povezav in števila neizoliranih vozlišč brez lihe barve v soseščini.
+
+Uspešno najdeno barvanje daje zgornjo mejo. Neuspeh hevristike ne dokazuje, da barvanje ne obstaja, zato bomo vsak domnevni protiprimer preverili z natančno metodo. Časovno prekinjene izračune bomo označili kot nerešene. Dodatno bomo iskali naravne podrazrede z mejo tri, pri čemer bomo upoštevali oviro ciklov, katerih dolžina ni deljiva s tri. Računske potrditve za končen nabor bomo jasno ločili od splošnih dokazov.
+
+\begingroup\small
+
+\section*{Izhodiščni viri}
+
+\emph{Pri pripravi tega opisa smo uporabili ChatGPT za zasnovo in jezikovno oblikovanje besedila.}
+
+\endgroup
+\end{document}
