@@ -11,102 +11,106 @@ def G_to_adj(G):
 
 def is_odd_coloring(adj, col): 
     # adj je seznam sosednosti grafa
-    # col je slovar, ki vsakemu vozlišču določa barvo
+    # col je slovar, ki vsakemu vozliscu doloca barvo
     """NEODVISNO preverjanje: ali je col liho barvanje grafa adj?"""
-    for v in adj: # za vsako vozlišče
-        for u in adj[v]: # za vsakega soseda od vozlišča v
-            if col[u] == col[v]: # če je barva enaka vrnemo False
+    for v in adj: # za vsako vozlisce
+        for u in adj[v]: # za vsakega soseda od vozlisca v
+            if col[u] == col[v]: # ce je barva enaka vrnemo False
                 return False                  
-        if adj[v]:  # preverimo, da ima vozlišče vsaj enega soseda
-            cnt = {} # štejemo pojavitve barv
-            for u in adj[v]: # za vsakega soseda preverimo
-                cnt[col[u]] = cnt.get(col[u], 0) + 1 # prištejemo en barvi, ki jo ima sosed
-            if not any(c % 2 == 1 for c in cnt.values()): # če nobena barva ni liha vrnemo False
+        if adj[v]:  # preverjamo, ce ima vozlisce vsaj enega soseda
+            cnt = {} # stejemo pojavitve barv
+            for u in adj[v]: # za vsakega soseda
+                cnt[col[u]] = cnt.get(col[u], 0) + 1 # pristejemo ena barvi, ki jo ima sosed
+                # get() pogleda, ali ta kljuc ze obstaja v slovarju
+                # ce ja, pristejemo 1, sicer vzamemo 0 in pristejemo 1
+            if not any(c % 2 == 1 for c in cnt.values()): # ce nobena barva ni liha vrnemo False
                 return False                    
-    return True
+    return True # sicer vrnemo True
 
 # POVEZANE KOMPONENTE GRAFA
 def _components(adj):
     seen, comps = set(), [] 
-    # seen je množica vozlišč, ki smo jih že obiskali
+    # seen je mnozica vozlisc, ki smo jih ze obiskali
     # comps je seznam, v katerega bomo shranjevali povezane komponente
-    for s in adj: # gremo čez vsa vozlišča grafa
-        if s in seen: # če smo s že videli, gremo naprej
+    for s in adj: # gremo cez vsa vozlisca grafa
+        if s in seen: # ce smo s ze videli, gremo naprej
             continue
         comp, q = [], deque([s])
-        # comp = [] – seznam za vozlišča trenutne komponente
-        # q = deque([s]) – vrsto, v katero damo začetno vozlišče s
-        seen.add(s) # s označimo kot viden
+        # comp = [] – seznam za vozlisca trenutne komponente
+        # q = deque([s]) – vrsto, v katero damo zacetno vozlisce s
+        seen.add(s) # s oznacimo kot viden
         while q: # dokler vrsta ni prazna
-            v = q.popleft() # odstranimo prvo vozlišče v vrsti in ga shranimo v v
-            comp.append(v) # to vozlišče dodamo v trenutno povezano komponento
+            v = q.popleft() # odstranimo prvo vozlisce v vrsti in ga shranimo v v
+            comp.append(v) # to vozlisce dodamo v trenutno povezano komponento
             for u in adj[v]: # za vsakega soseda od v
-                if u not in seen: # če u še nismo obiskali
+                if u not in seen: # ce u se nismo obiskali
                     seen.add(u) # ga damo v seen
-                    q.append(u) # in dodamo v vrsti
-        comps.append(comp) # komponento, ki smo jo našli damo v comps
+                    q.append(u) # in dodamo v vrsto
+        comps.append(comp) # komponento, ki smo jo nasli damo v comps
     return comps
 
 
-# cilj je najti liho barvanje povezane komponente grafa z največ k različnimi barvami
-# Če ga najde, vrne slovar col, v katerem je je ob vsakem vozlišču zapisana njegova barva.
+# Cilj je najti liho barvanje povezane komponente grafa z najvec k razlicnimi barvami.
+# Ce ga najde, vrne slovar col, v katerem je ob vsakem vozliscu zapisana njegova barva.
 # Sicer vrne None. 
 def _odd_coloring_connected(adj, comp, k):
     # adj – slovar sosednosti grafa.
-    # comp – seznam vozlišč ene povezane komponente.
-    # k – največje dovoljeno število različnih barv.
-    start = max(comp, key=lambda v: len(adj[v]))   # začnemo pri vozlišču z največ sosedi
-    # To je koristno, ker ima vozlišče z veliko sosedi navadno več omejitev pri izbiri barve.
+    # comp – seznam vozlisc ene povezane komponente.
+    # k – najvecje dovoljeno stevilo razlicnih barv.
+    start = max(comp, key=lambda v: len(adj[v]))   # zacnemo pri vozliscu z najvec sosedi
+    # To je koristno, ker ima vozlisce z veliko sosedi navadno vec omejitev pri izbiri barve.
     order, seen, q = [], {start}, deque([start])
-    # order = vrstni red obiskovanja vozlišč
-    # seen = že obiskana vozlišča
+    # order = vrstni red obiskovanja vozlisc
+    # seen = ze obiskana vozlisca
     # q = vrsta za BFS
     while q:        # dokler vrsta ni prazna
-        v = q.popleft() # vzamemo prvo vozlišče iz vrste
+        v = q.popleft() # vzamemo prvo vozlisce iz vrste
         order.append(v) # dodamo ga v seznam order
-        for u in adj[v]: # pregledamo sosede vozlišča
-            if u not in seen: # če še ni bil obiskan
+        for u in adj[v]: # pregledamo sosede vozlisca
+            if u not in seen: # ce se ni bil obiskan
                 seen.add(u) # ga damo med obiskane
                 q.append(u) # ga dodamo v vrsto
 
-    col = {} # pripravimo prazen slovar, v katerega bomo shranjevali barve vozlišč
+    col = {} # pripravimo prazen slovar, v katerega bomo shranjevali barve vozlisc
 
-    # To je pomožna funkcija, ki preveri, ali ima vozlišče x med svojimi sosedi
+    # To je pomozna funkcija, ki preveri, ali ima vozlisce x med svojimi sosedi
     # vsaj eno barvo, ki se pojavi liho mnogokrat.
     def ok_odd(x):
         """Ali ima x (ko so vsi sosedje pobarvani) barvo, ki se pojavi liho krat?"""
-        if not adj[x]: # Če nima sosedov, potem vrnemo True
+        if not adj[x]: # ce nima sosedov, potem vrnemo True
             return True
-        cnt = {} # ustvarimo prazen slovar za štetje barv sosedov
-        for u in adj[x]: # preštejemo kolikorat se posamezna barva pojavi med sosedi
+        cnt = {} # ustvarimo prazen slovar za stetje barv sosedov
+        for u in adj[x]: # prestejemo kolikorat se posamezna barva pojavi med sosedi
             cnt[col[u]] = cnt.get(col[u], 0) + 1
         return any(c % 2 == 1 for c in cnt.values()) 
 
     def extend(i, m):    
-        # i = indeks vozlišča v seznamu order, ki ga trenutno barvamo
-        # m = število različnih barv, ki smo jih do zdaj uporabili
+        # i = indeks vozlisca v seznamu order, ki ga trenutno barvamo
+        # m = stevilo razlicnih barv, ki smo jih do zdaj uporabili
         if i == len(order):
-             # če je i enak dolžini seznama order, smo pobarvali vsa vozlišča (vrnemo True)
+             # ce je i enak dolzini seznama order, smo pobarvali vsa vozlisca (vrnemo True)
             return True
-        v = order[i] # izberemo vozlišče, ki ga bomo zdaj poskusili pobarvati
+        v = order[i] # Sicer: izberemo vozlisce, ki ga bomo zdaj poskusili pobarvati.
         forbidden = {col[u] for u in adj[v] if u in col}
-        # forbidden so barve, ki jih že imajo pobarvani sosedi vozlišča v
+        # forbidden so barve, ki jih ze imajo pobarvani sosedi vozlisca v
         for c in range(min(m + 1, k)):      
-        # poskusimo prvo barvo, ki nam je na voljo (odpravimo simetrijo)
+        # poskusimo uporabiti vse ze uporabljene barve 0,1,...,m-1 ali najvec eno novo (m), ampak ne vec kot k
             if c in forbidden:
-                continue  # Če je barva c že uporabljena pri katerem od pobarvanih sosedov, jo preskočimo.
-            col[v] = c # dodelimo barvo
+                continue  # ce je barva c ze uporabljena pri katerem od pobarvanih sosedov, jo preskocimo.
+            col[v] = c # Sicer: dodelimo barvo
             good = True # predpostavimo, da je trenutno barvanje dobro
+
+            # Ker smo pobarvali v, se je lahko zgodilo, da je nekemu vozliscu zdaj pobarvana cela soseska. To sta 
+            # v sam ali kateri od njegovih sosedov, zato pregledamo ravno ta vozlisca ([v] + adj[v]).
             for x in [v] + adj[v]:
-                if x in col and all(u in col for u in adj[x]) and not ok_odd(x):
-                    # x in col: ali je x že pobarvan
-                    # all(u in col for u in adj[x]): ali so vsi sosedi x že pobarvani
-                    # not ok_odd(x): ali ima vozlišče x med svojimi sosedi vsaj eno barvo, ki se pojavi liho mnogokrat
+                if all(u in col for u in adj[x]) and not ok_odd(x):
+                    # all(u in col for u in adj[x]): ali so vsi sosedi x ze pobarvani
+                    # not ok_odd(x): ali vozlisce x med svojimi sosedi nima niti ene barve, ki se pojavi liho mnogokrat
                     good = False
                     break
-                # Če vsi ti pogoji držijo, so kršeni pogoji za liho barvanje. 
+                # ce vsi ti pogoji drzijo, so krseni pogoji za liho barvanje. 
             if good and extend(i + 1, max(m, c + 1)):
-                # Če je bilo okej, potem nadaljujemo:
+                # ce je bilo okej, potem nadaljujemo:
                 # gremo na naslednje vozlisce (i+1) in posodobimo stevilo uporabljenih barv
                 return True
             del col[v]
@@ -121,22 +125,25 @@ def odd_coloring(adj, k):
     """Liho k-barvanje celotnega grafa (slovar vozlisce->barva) ali None."""
     result = {} # prazen slovar, v katerega bomo shranjevali koncno barvanje celotnega grafa
     for comp in _components(adj): # gremo cez vse komponente
-        sub = _odd_coloring_connected(adj, comp, k) # določimo liho barvanje komponente
-        if sub is None: # če za katerokoliko komponento ne najdemo lihega barvanja, vrnemo None
+        sub = _odd_coloring_connected(adj, comp, k) # dolocimo liho barvanje komponente
+        if sub is None: # ce za katerokoliko komponento ne najdemo lihega barvanja, vrnemo None
             return None
-        result.update(sub) # če smo našli barvanje, dodamo v result
+        result.update(sub) # ce smo nasli barvanje, dodamo v result
     return result
 
+# Opomba: v sub in result so kljuci vozlisca in vrednosti barve teh vozlisc.
 
-# Ta funkcija poišče liho kromatično število grafa in ustrezno barvanje.
+
+# Ta funkcija poisce liho kromaticno stevilo grafa in ustrezno barvanje.
 def odd_chromatic_number(adj):
-    """chi_o(G) in ustrezno barvanje. Graf brez vozlisc ima chi_o = 0."""
-    if not adj: # Če graf nima vozlišč, vrnemo kromatično št. 0 in barvanje kot prazen slovar.
+    if not adj: # ce graf nima vozlisc, vrnemo kromaticno st. 0 in barvanje kot prazen slovar.
         return 0, {}
-    k = 1 # Začnemo z eno barvo. 
+    k = 1 # Zacnemo z eno barvo. 
     while True: # Ponavljamo, dokler ne najdemo ustreznega barvanja.
         col = odd_coloring(adj, k) # A lahko pobarvamo graf?
-        if col is not None: # Če ga lahko:
-            assert is_odd_coloring(adj, col)        # varnostno preverjanje
-            return k, col # vrnemo najmanjše št. barv in ustrezno barvanje
-        k += 1 # sicer št. barv povečamo za 1
+        if col is not None: # ce ga lahko:
+            assert is_odd_coloring(adj, col)        # varnostno preverjanje (True če je res, sicer vrne napako AssertionError)
+            return k, col # vrnemo najmanjse st. barv in ustrezno barvanje
+        k += 1 # sicer st. barv povecamo za 1
+
+# col: ključi vozlišča, vrednosti njihove barve
