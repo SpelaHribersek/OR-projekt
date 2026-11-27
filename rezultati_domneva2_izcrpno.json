@@ -1,0 +1,410 @@
+{
+  "1": {
+    "n": 1,
+    "planar_connected_graphs": 1,
+    "graphs_in_class": 1,
+    "chi_histogram": {
+      "1": 1
+    },
+    "max_chi": 1,
+    "counterexamples": [],
+    "seconds": 0.019
+  },
+  "2": {
+    "n": 2,
+    "planar_connected_graphs": 1,
+    "graphs_in_class": 1,
+    "chi_histogram": {
+      "2": 1
+    },
+    "max_chi": 2,
+    "counterexamples": [],
+    "seconds": 0.002
+  },
+  "3": {
+    "n": 3,
+    "planar_connected_graphs": 2,
+    "graphs_in_class": 2,
+    "chi_histogram": {
+      "3": 2
+    },
+    "max_chi": 3,
+    "counterexamples": [],
+    "seconds": 0.003
+  },
+  "4": {
+    "n": 4,
+    "planar_connected_graphs": 6,
+    "graphs_in_class": 3,
+    "chi_histogram": {
+      "2": 1,
+      "3": 2
+    },
+    "max_chi": 3,
+    "counterexamples": [],
+    "seconds": 0.003
+  },
+  "5": {
+    "n": 5,
+    "planar_connected_graphs": 20,
+    "graphs_in_class": 7,
+    "chi_histogram": {
+      "3": 6,
+      "4": 1
+    },
+    "max_chi": 4,
+    "counterexamples": [
+      {
+        "chi": 4,
+        "graph6": "DQ{"
+      }
+    ],
+    "seconds": 0.004
+  },
+  "6": {
+    "n": 6,
+    "planar_connected_graphs": 99,
+    "graphs_in_class": 17,
+    "chi_histogram": {
+      "2": 2,
+      "3": 14,
+      "4": 1
+    },
+    "max_chi": 4,
+    "counterexamples": [
+      {
+        "chi": 4,
+        "graph6": "ECZW"
+      }
+    ],
+    "seconds": 0.01
+  },
+  "7": {
+    "n": 7,
+    "planar_connected_graphs": 646,
+    "graphs_in_class": 42,
+    "chi_histogram": {
+      "3": 37,
+      "4": 5
+    },
+    "max_chi": 4,
+    "counterexamples": [
+      {
+        "chi": 4,
+        "graph6": "F?`uW"
+      },
+      {
+        "chi": 4,
+        "graph6": "F?otW"
+      },
+      {
+        "chi": 4,
+        "graph6": "FCQeo"
+      },
+      {
+        "chi": 4,
+        "graph6": "FCQeW"
+      },
+      {
+        "chi": 4,
+        "graph6": "FCQrW"
+      }
+    ],
+    "seconds": 0.077
+  },
+  "8": {
+    "n": 8,
+    "planar_connected_graphs": 5974,
+    "graphs_in_class": 113,
+    "chi_histogram": {
+      "2": 3,
+      "3": 96,
+      "4": 14
+    },
+    "max_chi": 4,
+    "counterexamples": [
+      {
+        "chi": 4,
+        "graph6": "G?AEJs"
+      },
+      {
+        "chi": 4,
+        "graph6": "G?B@tK"
+      },
+      {
+        "chi": 4,
+        "graph6": "G?`DeW"
+      },
+      {
+        "chi": 4,
+        "graph6": "G?`DeK"
+      },
+      {
+        "chi": 4,
+        "graph6": "G?`DbK"
+      },
+      {
+        "chi": 4,
+        "graph6": "G?`DRk"
+      },
+      {
+        "chi": 4,
+        "graph6": "G?b@dS"
+      },
+      {
+        "chi": 4,
+        "graph6": "G?b@dK"
+      },
+      {
+        "chi": 4,
+        "graph6": "G?`ado"
+      },
+      {
+        "chi": 4,
+        "graph6": "G?`aeW"
+      },
+      {
+        "chi": 4,
+        "graph6": "G?`adW"
+      },
+      {
+        "chi": 4,
+        "graph6": "G?`alW"
+      },
+      {
+        "chi": 4,
+        "graph6": "GCOebW"
+      },
+      {
+        "chi": 4,
+        "graph6": "GCOebK"
+      }
+    ],
+    "seconds": 1.194
+  },
+  "9": {
+    "n": 9,
+    "planar_connected_graphs": 71885,
+    "graphs_in_class": 326,
+    "chi_histogram": {
+      "3": 273,
+      "4": 53
+    },
+    "max_chi": 4,
+    "counterexamples": [
+      {
+        "chi": 4,
+        "graph6": "H??CED|"
+      },
+      {
+        "chi": 4,
+        "graph6": "H??EDD]"
+      },
+      {
+        "chi": 4,
+        "graph6": "H??F?yR"
+      },
+      {
+        "chi": 4,
+        "graph6": "H?AAEHx"
+      },
+      {
+        "chi": 4,
+        "graph6": "H?AADHx"
+      },
+      {
+        "chi": 4,
+        "graph6": "H?AADHz"
+      },
+      {
+        "chi": 4,
+        "graph6": "H?AADrE"
+      },
+      {
+        "chi": 4,
+        "graph6": "H?AE@qd"
+      },
+      {
+        "chi": 4,
+        "graph6": "H?AE@qb"
+      },
+      {
+        "chi": 4,
+        "graph6": "H?ABCrE"
+      },
+      {
+        "chi": 4,
+        "graph6": "H?ABCrB"
+      },
+      {
+        "chi": 4,
+        "graph6": "H?ABAqs"
+      },
+      {
+        "chi": 4,
+        "graph6": "H?ABArE"
+      },
+      {
+        "chi": 4,
+        "graph6": "H?ABAqe"
+      },
+      {
+        "chi": 4,
+        "graph6": "H?ABArD"
+      },
+      {
+        "chi": 4,
+        "graph6": "H?ABAqT"
+      },
+      {
+        "chi": 4,
+        "graph6": "H?ABChZ"
+      },
+      {
+        "chi": 4,
+        "graph6": "H?ABAei"
+      },
+      {
+        "chi": 4,
+        "graph6": "H?ABAem"
+      },
+      {
+        "chi": 4,
+        "graph6": "H?AB?vE"
+      },
+      {
+        "chi": 4,
+        "graph6": "H?AB?uF"
+      },
+      {
+        "chi": 4,
+        "graph6": "H?ABcXJ"
+      },
+      {
+        "chi": 4,
+        "graph6": "H?BD?pp"
+      },
+      {
+        "chi": 4,
+        "graph6": "H?BD?qT"
+      },
+      {
+        "chi": 4,
+        "graph6": "H?BD?pT"
+      },
+      {
+        "chi": 4,
+        "graph6": "H?B@cXe"
+      },
+      {
+        "chi": 4,
+        "graph6": "H?`@?b~"
+      },
+      {
+        "chi": 4,
+        "graph6": "H?`@Eai"
+      },
+      {
+        "chi": 4,
+        "graph6": "H?`@Eab"
+      },
+      {
+        "chi": 4,
+        "graph6": "H?`@E_r"
+      },
+      {
+        "chi": 4,
+        "graph6": "H?`@EPr"
+      },
+      {
+        "chi": 4,
+        "graph6": "H?`@Cpt"
+      },
+      {
+        "chi": 4,
+        "graph6": "H?`@Cpv"
+      },
+      {
+        "chi": 4,
+        "graph6": "H?`@Epe"
+      },
+      {
+        "chi": 4,
+        "graph6": "H?`DAbK"
+      },
+      {
+        "chi": 4,
+        "graph6": "H?`DAbE"
+      },
+      {
+        "chi": 4,
+        "graph6": "H?`DAbB"
+      },
+      {
+        "chi": 4,
+        "graph6": "H?`D@bS"
+      },
+      {
+        "chi": 4,
+        "graph6": "H?`D@bK"
+      },
+      {
+        "chi": 4,
+        "graph6": "H?`D@bE"
+      },
+      {
+        "chi": 4,
+        "graph6": "H?`D@`e"
+      },
+      {
+        "chi": 4,
+        "graph6": "H?`DCfK"
+      },
+      {
+        "chi": 4,
+        "graph6": "H?`@ePe"
+      },
+      {
+        "chi": 4,
+        "graph6": "H?`@dPe"
+      },
+      {
+        "chi": 4,
+        "graph6": "H?`@dPU"
+      },
+      {
+        "chi": 4,
+        "graph6": "H?`@dPd"
+      },
+      {
+        "chi": 4,
+        "graph6": "H?`@dFK"
+      },
+      {
+        "chi": 4,
+        "graph6": "H?`@dDU"
+      },
+      {
+        "chi": 4,
+        "graph6": "H?`@dFD"
+      },
+      {
+        "chi": 4,
+        "graph6": "H?`@cTe"
+      },
+      {
+        "chi": 4,
+        "graph6": "H?`@cTF"
+      },
+      {
+        "chi": 4,
+        "graph6": "H?`DQgr"
+      },
+      {
+        "chi": 4,
+        "graph6": "HCOceQd"
+      }
+    ],
+    "seconds": 29.011
+  }
+}
